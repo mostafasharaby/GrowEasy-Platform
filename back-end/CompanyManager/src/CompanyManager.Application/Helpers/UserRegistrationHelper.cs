@@ -72,7 +72,7 @@ namespace Auth.Application.Helpers
 
             var user = new AppUser
             {
-                UserName = company.Email,
+                UserName = company.CompanyNameEnglish,
                 Email = company.Email,
                 PhoneNumber = company.PhoneNumber,
                 CompanyId = company.Id

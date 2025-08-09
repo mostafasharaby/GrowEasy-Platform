@@ -28,7 +28,7 @@ app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocal
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 app.UseCors("MyPolicy");
 app.UseAuthentication();

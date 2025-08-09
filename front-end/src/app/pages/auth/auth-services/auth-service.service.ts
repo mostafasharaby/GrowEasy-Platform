@@ -5,6 +5,7 @@ import { tap } from 'rxjs';
 import { jwtDecode } from 'jwt-decode';
 import { environment } from '../../../../environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { Otp, SetPassword } from '../user-model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,8 @@ export class AuthServiceService {
   private loginUrl = `${environment.api}/Account/login`;
   public googleloginUrl = `${environment.api}/Account/LoginWithGoogle`;
   private registerUrl = `${environment.api}/Account/register/user`;
+private CompanyUrl = `${environment.api}/Company`;
+
   private userUrl = '';
   private tokenCheckInterval: any;
   usernameTakenError: boolean = false;
@@ -65,6 +68,20 @@ export class AuthServiceService {
       })
     );
   }
+
+  registerCompany(company: FormData): Observable<any> {
+    return this.http.post(`${this.CompanyUrl}/register/company`, company);
+  }
+
+  validateOtp(otp: Otp): Observable<any> {
+    return this.http.post(`${this.CompanyUrl}/validate-otp`, otp);
+  }
+
+  setPassword(passwordData: SetPassword): Observable<any> {
+    return this.http.post(`${this.CompanyUrl}/set-password`, passwordData);
+  }
+
+  
 
   logout() {
     this.toaster.info("Please log in again to your account");
@@ -164,6 +181,11 @@ isRole(role: string): boolean {
       return decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
     }
     return null;
+  }
+  getCompanyDetails(): Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get(`${this.CompanyUrl}/details`, { headers });
   }
 
   public getHeaders(): HttpHeaders {
