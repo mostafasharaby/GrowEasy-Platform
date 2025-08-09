@@ -1,0 +1,310 @@
+<div id="preloader">
+	<div class="loader"></div>
+</div>
+
+<app-side-bar></app-side-bar>
+<div class="p-4 sm:ml-64" style="background-color: #eef1f5;">
+	<div class="page-container">
+		<!-- start page content -->
+		<div class="page-content-wrapper">
+			<div class="page-content">
+
+				<div class="page-bar">
+					<div class="page-title-breadcrumb">
+						<div class=" pull-left">
+							<div class="page-title">Dashboard</div>
+						</div>
+						<ol class="breadcrumb page-breadcrumb pull-right">
+							<li><i class="fa fa-home"></i>&nbsp;<a class="parent-item"
+									href="index.html">Home</a>&nbsp;<i class="fa fa-angle-right"></i>
+							</li>
+							<li class="active">Dashboard</li>
+						</ol>
+					</div>
+				</div>
+				<!-- Start Widget -->
+				<div class="state-overview mt-5">
+					<div class="row ">
+						<div class="col-xl-3 col-md-6 col-12" *ngFor="let box of infoBoxes">
+							<div class="info-box" [ngClass]="box.bgClass">
+								<span class="info-box-icon push-bottom">
+									<i [class]="box.iconClass"></i>
+								</span>
+								<div class="info-box-content">
+									<span class="info-box-text">{{ box.text }}</span>
+									<span class="info-box-number">{{ box.number }}</span>
+									<div class="progress">
+										<div class="progress-bar" [style.width]="box.progress + '%'">
+										</div>
+									</div>
+									<span class="progress-description">
+										{{ box.description }}
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Widget -->
+
+				<!-- chart start -->
+				<app-chart></app-chart>
+				<!-- Chart end -->
+				<div class="row">
+					<div class="col-md-8 col-sm-12">
+						<div class="card  card-box">
+							<div class="card-head">
+								<header>Events</header>
+								<div class="tools">
+									<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+									<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+									<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+								</div>
+							</div>
+							<div class="card-body ">
+								<div class="row table-padding">
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="btn-group">
+											<a id="addRow" class="btn btn-info btn-circle"
+												(click)="openAddEventModal()">
+												Add New <i class="fa fa-plus"></i>
+											</a>
+										</div>
+									</div>
+									<div class="col-md-6 col-sm-6 col-xs-6">
+										<div class="btn-group pull-right">
+											<button class="btn deepPink-bgcolor btn-circle btn-outline dropdown-toggle"
+												data-bs-toggle="dropdown">Tools
+												<i class="fa fa-angle-down"></i>
+											</button>
+											<ul class="dropdown-menu pull-right">
+												<li>
+													<a href="javascript:;">
+														<i class="fa fa-print"></i> Print </a>
+												</li>
+												<li>
+													<a href="javascript:;">
+														<i class="fa fa-file-pdf-o"></i> Save as PDF </a>
+												</li>
+												<li>
+													<a href="javascript:;">
+														<i class="fa fa-file-excel-o"></i> Export to Excel </a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="table-responsive">
+									<table
+										class="table table-striped table-bordered table-hover table-checkable order-column"
+										id="example4">
+										<thead>
+											<tr>
+												<th>
+													<label class="rt-chkbox rt-chkbox-single rt-chkbox-outline">
+														<input type="checkbox" class="group-checkable"
+															data-set="#sample_1 .checkboxes" />
+														<span></span>
+													</label>
+												</th>
+												<th>Event Name</th>
+												<th>Category</th>
+												<th>Venue</th>
+												<th>Event Date</th>
+												<th>Actions </th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor="let event of events" class="odd gradeX">
+												<td>
+													<label class="rt-chkbox rt-chkbox-single rt-chkbox-outline">
+														<input type="checkbox" class="checkboxes" value="1" />
+														<span></span>
+													</label>
+												</td>
+												<td> {{ event.name || 'Unknown' }} </td>
+												<td>
+													<a href="mailto:therichposts@gmail.com"> {{ event.category
+														|| 'Unknown' }} </a>
+												</td>
+												<td class="center"> {{ event.venue }}</td>
+												<td class="center"> {{ event.eventDate | date:'MM/dd/yyyy' }} </td>
+
+
+
+												<td class="center">
+													<div class="btn-group">
+														<button
+															class="btn btn-xs btn-warning btn-circle dropdown-toggle center no-margin"
+															type="button" data-bs-toggle="dropdown"
+															aria-expanded="false"> Actions
+															<i class="fa fa-angle-down"></i>
+														</button>
+														<ul class="dropdown-menu pull-left" role="menu">
+															<li>
+																<a (click)="openDeleteModal(event.id)"><i
+																		class="fa fa-trash-o"></i>
+																	Delete </a>
+															</li>
+															<li>
+																<a (click)="onEditEvent(event)" href="javascript:;"><i
+																		class="fa fa-ban"></i>
+																	Edite </a>
+															</li>
+														</ul>
+													</div>
+												</td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-12">
+						<div class="card  card-box">
+							<div class="card-head">
+								<header>USER LIST</header>
+								<div class="tools">
+									<a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+									<a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+									<a class="t-close btn-color fa fa-times" href="javascript:;"></a>
+								</div>
+							</div>
+							<div class="card-body no-padding height-9">
+								<div class="row">
+									<ul class="docListWindow">
+										<li *ngFor="let user of users">
+											<div class="prog-avatar">
+												<img [src]="user.imageUrl" alt="" width="40" height="40">
+											</div>
+											<div class="details">
+												<div class="title">
+													<a href="#">{{user.username}}</a> -(MBBS,MD)
+												</div>
+												<div>
+													<span class="clsAvailable">Available</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+									<div class="text-center full-width">
+										<a href="#">View all</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- start admited patient list -->
+				<app-temp-appointment></app-temp-appointment>
+				<!-- end admited patient list -->
+			</div>
+		</div>
+		<!-- end page content -->
+	</div>
+
+
+
+
+</div>
+
+<app-delete-modal [itemId]="selectedAppointmentId" (confirm)="onDeleteEvent($event)"></app-delete-modal>
+
+
+<div #editModal id="editModal"
+	class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 mt-5">
+	<div class="bg-white rounded-lg shadow-lg p-4 w-[600px]">
+		<h2 class="text-xl text-dark mb-2">Edit Event</h2>
+
+		<div class="flex gap-4">
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Name</label>
+				<input type="text" [(ngModel)]="name" class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Category</label>
+				<input type="text" [(ngModel)]="category" class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+		</div>
+
+		<div class="flex gap-4 mt-4">
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Event Date</label>
+				<input type="date" [(ngModel)]="eventDate" class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Venue</label>
+				<input type="text" [(ngModel)]="venue" class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+		</div>
+
+		<div class="flex gap-4 mt-4">
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Price</label>
+				<input type="number" [(ngModel)]="price" class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Available Tickets</label>
+				<input type="number" [(ngModel)]="availableTickets"
+					class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+		</div>
+
+		<div class="mt-4">
+			<label class="block text-sm font-medium text-dark mb-1">Description</label>
+			<textarea [(ngModel)]="description" class="w-full px-2 py-1 border text-dark rounded-lg"></textarea>
+		</div>
+
+		<div class="flex gap-4 mt-4">
+			<div class="w-1/2">
+				<label class="block text-sm font-medium text-dark mb-1">Image (Optional)</label>
+				<input type="file" (change)="onFileSelected($event)"
+					class="w-full px-2 py-1 border text-dark rounded-lg">
+			</div>
+
+			<div class="w-1/2 flex items-center mt-6">
+				<input type="checkbox" [(ngModel)]="removeCurrentImage" id="removeImage" class="mr-2">
+				<label for="removeImage" class="text-sm font-medium text-dark">Remove Current Image</label>
+			</div>
+		</div>
+
+		<div class="flex justify-end mt-6">
+			<button (click)="closeModal()" class="bg-gray-400 px-4 py-2 rounded-lg mr-2">Cancel</button>
+			<button (click)="saveEvent()" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Save</button>
+		</div>
+
+	</div>
+</div>
+
+
+<div #addModal id="addModal" class="hidden fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 mt-5 ">
+	<div class="bg-white rounded-lg shadow-lg p-4 w-[600px]">
+		<h2 class="text-dark">Add New Event</h2>
+		<form (ngSubmit)="saveNewEvent()" #addEventForm="ngForm">
+			<input type="text" [(ngModel)]="addName" name="addName" placeholder="Name" required
+				class="form-control mb-2">
+			<textarea [(ngModel)]="addDescription" name="addDescription" placeholder="Description" required
+				class="form-control mb-2"></textarea>
+			<input type="text" [(ngModel)]="addCategory" name="addCategory" placeholder="Category" required
+				class="form-control mb-2">
+			<input type="datetime-local" [(ngModel)]="addEventDate" name="addEventDate" required
+				class="form-control mb-2">
+			<input type="text" [(ngModel)]="addVenue" name="addVenue" placeholder="Venue" required
+				class="form-control mb-2">
+			<input type="number" [(ngModel)]="addPrice" name="addPrice" placeholder="Price" required
+				class="form-control mb-2">
+			<input type="number" [(ngModel)]="addAvailableTickets" name="addAvailableTickets"
+				placeholder="Available Tickets" required class="form-control mb-2">
+			<input type="file" (change)="onAddFileSelected($event)" class="form-control mb-2">
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-success text-dark">Save</button>
+				<button type="button" class="btn btn-secondary text-dark" (click)="closeAddModal()">Cancel</button>
+			</div>
+		</form>
+	</div>
+</div>
