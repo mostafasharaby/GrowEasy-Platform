@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { EventDetailsComponent } from './event-details.component';
+import { OtpValidatorComponent } from './OtpValidator.component';
 
-describe('EventDetailsComponent', () => {
-  let component: EventDetailsComponent;
-  let fixture: ComponentFixture<EventDetailsComponent>;
+describe('OtpValidatorComponent', () => {
+  let component: OtpValidatorComponent;
+  let fixture: ComponentFixture<OtpValidatorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EventDetailsComponent ]
+      declarations: [ OtpValidatorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EventDetailsComponent);
+    fixture = TestBed.createComponent(OtpValidatorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

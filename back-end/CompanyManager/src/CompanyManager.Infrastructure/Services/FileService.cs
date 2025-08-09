@@ -21,14 +21,18 @@ namespace CompanyManager.Infrastructure.Services
                 Directory.CreateDirectory(uploadPath);
 
             var uniqueFileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
-            Console.WriteLine("Path", Path.GetExtension(file.FileName));
             var filePath = Path.Combine(uploadPath, uniqueFileName);
 
-            using (var fileStream = new FileStream(filePath, FileMode.Create))  // path + mode (enum)
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                await file.CopyToAsync(fileStream); // fileStream-> destenation 
+                await file.CopyToAsync(fileStream);
             }
-            return $"/{folderName}/{uniqueFileName}";
+
+            var webPath = Path.Combine(folderName, uniqueFileName)
+                          .Replace("\\", "/");
+
+            return $"/{webPath}";
         }
+
     }
 }

@@ -3,7 +3,7 @@
   <div class="header-top">
     <div class="container clearfix mx-auto max-w-7xl px-5 sm:px-6">
       <div class="top-left">
-        <h6>Welcome to our Event Management System!</h6>
+        <h6>Welcome to {{ company?.companyNameEnglish }}!</h6>
       </div>
       <div class="top-right">
         <ul class="social-links">
@@ -23,8 +23,11 @@
     <div class="container clearfix  mx-auto max-w-7xl px-5 sm:px-6">
       <div class="logo">
         <figure>
-          <a href="index.html">
-            <img src="images/loggggo-3.png" alt="" width="220px" height="100">
+          <a href="">
+            <!-- <img [src]="company?.logoPath" alt="Company Logo" width="220px" height="100"> -->
+             <img [src]="'http://localhost:5124' + company?.logoPath"
+     alt="Company Logo"
+     width="220" height="100">
           </a>
         </figure>
       </div>

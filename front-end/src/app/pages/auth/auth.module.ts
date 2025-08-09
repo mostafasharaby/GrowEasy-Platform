@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { LoginSuccessComponent } from './LoginSuccess/LoginSuccess.component';
 import { ConfirmEmailComponent } from './confirm-email/confirm-email.component';
+import { OtpValidatorComponent } from './OtpValidator/OtpValidator.component';
+import { SetPasswordComponent } from './SetPassword/SetPassword.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -21,6 +23,9 @@ const routes: Routes = [
   { path: 'reset-password/:token/:email', component: ForgetPasswordComponent },
   { path: 'login-success', component: LoginSuccessComponent },
   { path: 'confirm-email', component: ConfirmEmailComponent },
+  { path: 'otp-validator', component: OtpValidatorComponent },
+  { path: 'set-password', component: SetPasswordComponent },
+
 ] 
 
 @NgModule({
@@ -39,7 +44,9 @@ const routes: Routes = [
     ResetPasswordComponent,
     ForgetPasswordComponent,
     LoginSuccessComponent,
-    ConfirmEmailComponent
+    ConfirmEmailComponent,
+    OtpValidatorComponent,
+    SetPasswordComponent
   ],
   exports: [LogoutComponent]
 })

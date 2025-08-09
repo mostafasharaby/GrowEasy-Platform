@@ -23,7 +23,7 @@ import { AdminModule } from './admin/admin.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    RouterModule ,
+  RouterModule.forRoot([]) ,
     AuthModule,
     GeneralModule,  
     AdminModule,

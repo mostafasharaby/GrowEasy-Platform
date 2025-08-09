@@ -7,7 +7,8 @@ using MediatR;
 
 namespace CompanyManager.Application.Handlers.CompanyHandlers
 {
-    internal class CompanyHandlerQuery : IRequestHandler<GetCompanyByIdQuery, Response<CompanyDto>>
+    internal class CompanyHandlerQuery : IRequestHandler<GetCompanyByIdQuery, Response<CompanyDto>>,
+                                          IRequestHandler<GetCompanyByEmailQuery, Response<CompanyDto>>
     {
         private readonly ICompanyRepository _companyRepository;
         private readonly IMapper _mapper;
@@ -41,5 +42,25 @@ namespace CompanyManager.Application.Handlers.CompanyHandlers
                 return _responseHandler.NotFound<CompanyDto>(ex.Message);
             }
         }
+
+        public async Task<Response<CompanyDto>> Handle(GetCompanyByEmailQuery request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var company = await _companyRepository.GetByEmailAsync(request.Email);
+                if (company == null)
+                {
+                    return _responseHandler.BadRequest<CompanyDto>("Company not found for the provided email");
+                }
+
+                var companyDto = _mapper.Map<CompanyDto>(company);
+                return _responseHandler.Success(companyDto);
+            }
+            catch (Exception ex)
+            {
+                return _responseHandler.NotFound<CompanyDto>(ex.Message);
+            }
+        }
+
     }
 }

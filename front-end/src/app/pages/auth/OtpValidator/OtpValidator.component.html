@@ -1,0 +1,38 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card shadow-lg p-4 border-0 rounded-4" style="max-width: 400px; width: 100%;">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold text-primary">🔐 Verify OTP</h2>
+      <p class="text-muted">Enter the code sent to your email.</p>
+    </div>
+
+    <form [formGroup]="otpForm" (ngSubmit)="onSubmit()">
+      <div class="form-group mb-3">
+        <label for="otp" class="form-label fw-semibold">One-Time Password</label>
+        <input
+          id="otp"
+          type="text"
+          maxlength="6"
+          class="form-control text-center fs-4 rounded-pill"
+          formControlName="otp"
+          placeholder="••••••"
+          required
+        />
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary w-100 rounded-pill py-2 fw-semibold"
+        [disabled]="otpForm.invalid"
+      >
+        ✅ Validate OTP
+      </button>
+    </form>
+
+    <div class="text-center mt-3">
+      <small class="text-muted">
+        Didn’t receive the code?
+        <a href="#" class="text-decoration-none">Resend OTP</a>
+      </small>
+    </div>
+  </div>
+</div>
