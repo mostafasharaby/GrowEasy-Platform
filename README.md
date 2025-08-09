@@ -1,19 +1,18 @@
-# 🎟️ Event Booking System
+# 🌱 GrowEasy Platform
 
-A full-stack web application for users to browse, book, and manage event tickets, with a powerful admin dashboard for managing events and tracking insights.
+A full-stack web application designed to streamline company registration, verification, and authentication for managing programming companies, featuring a clean and intuitive user experience.
 
 ---
 
 ## 📌 Project Overview
 
-This project is a modern, scalable Event Booking System built using:
+GrowEasy Platform is a modern, scalable platform for anonymous users to register as companies, verify their accounts via OTP, set secure passwords, and access a personalized company dashboard. The project is built with clean code principles and a four-layer architecture, ensuring maintainability and scalability.
 
-- **Backend**: .NET 8 with Clean Architecture (Domain-Driven Design)
-- **Frontend**: Angular 18
-- **Authentication**: JWT, Google Sign-In, Email Confirmation, Password Reset
-- **Admin Panel**: Analytics, Event Management (CRUD), User Stats
-- **User Panel**: Event search, filtering, booking
-- **Extra Features**: CQRS, MediatR, AutoMapper, Serilog, FluentValidation, xUnit Testing
+- **Backend**: .NET Core 8 with Clean Architecture
+- **Frontend**: Angular 16+
+- **Database**: PostgreSQL
+- **Authentication**: ASP.NET Identity, JWT, OTP-based email verification
+- **Features**: Company registration, OTP validation, password management, and a minimalistic company dashboard
 
 ---
 
@@ -22,51 +21,48 @@ This project is a modern, scalable Event Booking System built using:
 ### 🔧 Backend (.NET API)
 
 ```text
-back-end/EventEventBooking/
-├── API/             # ASP.NET Core Web API Layer (controllers, middlewares)
-├── Application/     # Application Layer (CQRS handlers, DTOs, interfaces)
-├── Domain/          # Domain Layer (Entities, Enums, Interfaces, Exceptions)
-├── Infrastructure/  # Infrastructure Layer (DB context, Repositories, Identity)
-├── Tests/           # Unit tests with xUnit & FluentAssertions
+back-end/GrowEasy/
+├── Data/            # Entity models, DbContext, migrations
+├── Infrastructure/  # Repositories, file handling, email services
+├── Application/     # Services, CQRS commands/queries, DTOs, AutoMapper
+├── API/             # Controllers, middleware, API endpoints
 ```
 
 ### 🎨 Frontend (Angular)
+
 ```text
 front-end/
 ├── src/
 │ ├── app/
-│ │ ├── Services/ # Auth services, interceptors, guards
-│ │ ├── shared/ # Shared UI components
-│ │ ├── user/ # Event listing, booking, filters
-│ │ ├── admin/ # Dashboard, charts, event CRUD
-│ │ └── pages/ # Auth pages, home, events, booking success
+│ │ ├── components/    # UI components (signup, OTP validator, set password, login, home)
+│ │ ├── services/      # Auth and file upload services
+│ │ ├── models/        # TypeScript interfaces for data models
+│ │ ├── shared/        # Shared modules, directives, pipes
+│ │ └── app-routing.module.ts  # Application routing
 ```
 
 ---
 
 ## 🚀 Features
 
-### 🔐 Authentication & Authorization
+### 🔐 Company Registration & Authentication
 
-- JWT Authentication with Role-based Authorization (Admin/User)
-- Google Sign-In
-- Email confirmation during registration
-- Password reset via email
+- Register as a company with required fields: Arabic Name, English Name, Email
+- Optional fields: Phone Number, Website URL, Company Logo
+- Logo preview before submission
+- OTP sent to company email for verification
+- Password setting with validation (minimum 7 characters, one capital letter, one number, one special character)
+- JWT-based login with company email and password
+- Home page displaying company logo and greeting ("Hello {Company Name}")
+- Logout functionality
 
-### 🧑‍💻 Admin Panel
+### 🧑‍💻 User Flow
 
-- Add, update, delete events
-- View total number of users, events, and revenue
-- Data visualization with Chart.js
-- Responsive dashboard with role-based access
-
-### 👥 User Functionality
-
-- Event listing with filtering (price, ticket availability)
-- Search events by name or description
-- Book tickets (only once per event)
-- "Booked" status replaces "Book Now" on booked events
-- Redirect to a success page after booking
+- **Sign Up**: Users provide company details, upload a logo, and receive an OTP via email.
+- **OTP Verification**: Validate OTP on a dedicated page (OTP displayed in tooltip for testing).
+- **Set Password**: Set a secure password matching validation criteria.
+- **Login**: Log in with email and password to access the company dashboard.
+- **Home Page**: View company logo, name, and logout option.
 
 ---
 
@@ -75,31 +71,31 @@ front-end/
 ### Backend
 
 - ASP.NET Core 8
-- Clean Architecture + DDD
-- Entity Framework Core
-- FluentValidation
-- CQRS with MediatR
-- AutoMapper
-- Serilog (Logging)
-- xUnit + FluentAssertions (Unit Testing)
-- Identity + JWT + Google OAuth
+- Clean Architecture (Data, Repository, Services, API)
+- Entity Framework Core (PostgreSQL)
+- ASP.NET Identity for authentication
+- JWT for secure token-based authentication
+- AutoMapper for object mapping
+- FluentValidation for input validation
+- MediatR for CQRS pattern
+- File upload handling for company logos
+- Email service integration for OTP delivery
 
 ### Frontend
 
-- Angular 18
-- Angular Material UI
-- Chart.js
-- RxJS
-- ngx-toastr
-- Angular Forms & Reactive Forms
+- Angular 16+
+- Angular Material for UI components
+- Reactive Forms for form validation
+- RxJS for asynchronous operations
+- FileReader for logo preview
+- HTTPClient for API communication
 
 ---
 
 ## 🧪 Testing
 
-- ✅ Unit Testing with **xUnit**
-- ✅ Assertions using **FluentAssertions**
-- ✅ Separated test project under `/Tests`
+- Backend: Unit tests can be implemented using xUnit or NUnit (not included in this sample but recommended).
+- Frontend: Angular component tests using Jasmine/Karma (extendable for form validation and API calls).
 
 ---
 
@@ -109,63 +105,75 @@ front-end/
 
 1. **Clone the repository**:
    ```bash
-   git clone git@github.com:mostafasharaby/Event-Booking-System.git
-   cd back-end
-   cd EventBooking
-2.  ## 🔐 Configuration
-      Before running the project, create a file named `appsettings.json` in the root of the backend project.  
-      You can use `appsettings.example.json` as a template.
-      ```bash
-      cp appsettings.example.json appsettings.json
-      ```
-3.  Apply migrations
-4.  ```bash
-     dotnet ef database update
-    ```
-5. Run the API
+   git clone <repository-url>
+   cd back-end/GrowEasy
+   ```
+
+2. **Configure appsettings.json**:
+   Create `appsettings.json` based on `appsettings.example.json`:
    ```bash
-    dotnet run
-    ```
-6.  ✅ The API will run at: https://localhost:7146
+   cp appsettings.example.json appsettings.json
+   ```
+   Update with your PostgreSQL connection string:
+   ```json
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Host=localhost;Database=GrowEasyDb;Username=postgres;Password=your_password"
+     }
+   }
+   ```
+
+3. **Apply database migrations**:
+   ```bash
+   dotnet ef database update
+   ```
+
+4. **Run the API**:
+   ```bash
+   dotnet run
+   ```
+   The API will be available at `https://localhost:5253`.
 
 ### 🔜 Frontend (Angular)
 
-1. **Navigate to the frontend directory**
-    ```bash
-    cd front-end
-    ```
-2. **Install dependencies**
+1. **Navigate to the frontend directory**:
    ```bash
-    npm install
-    ```
-3. **Run Angular Development Server**
-  ```bash
-  ng serve
-  ```
-4. ✅ The app will be available at: http://localhost:4200
+   cd front-end
+   ```
 
-**🔐 Admin Credentials (for demo)**
-   Default admin credentials (after seeding or manual DB insert):
-   
-   Email: admin@example.com
-   Password: P@ssw0rd! 
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
 
-**🔐 User Credentials (for demo)**
-   Default user credentials (after seeding or manual DB insert):
+3. **Run the Angular development server**:
+   ```bash
+   ng serve
+   ```
+   The app will be available at `http://localhost:4200`.
 
-   Email: noor@example.com
-   Password: P@ssw0rd! 
+---
 
+## 🔐 Configuration Notes
 
-![Image](https://github.com/user-attachments/assets/091b66c4-d13e-4c40-98f8-dc8b9808cdeb)
-![Image](https://github.com/user-attachments/assets/2a9fa493-377a-45b9-af23-e172219acd7c)
-![Image](https://github.com/user-attachments/assets/0e376594-2fa7-43b5-9591-64f27106c642)
-![Image](https://github.com/user-attachments/assets/96ba47dc-53d2-4326-a3e5-be2c14210823)
-![Image](https://github.com/user-attachments/assets/9ead6136-3710-4a19-b5ca-9b729a58778c)
-![Image](https://github.com/user-attachments/assets/d5f6e666-ea40-4c76-9e72-81ca114fedb1)
-![Image](https://github.com/user-attachments/assets/3a542c72-6cf6-4690-a58e-5901ad624137)
-![Image](https://github.com/user-attachments/assets/f0f8c534-14f7-4752-b93b-8becf6ef2e35)
-![Image](https://github.com/user-attachments/assets/39eb6a40-1c64-4617-928f-a8f380615dea)
-![Image](https://github.com/user-attachments/assets/23df30be-b8fb-4007-b603-617d574552e3)
-![Image](https://github.com/user-attachments/assets/cdc9982a-2fe5-4aba-aafa-febfc55bb375)
+- **Email Service**: Configure the email service (e.g., SendGrid or SMTP) in `appsettings.json` for OTP delivery. For testing, OTPs can be logged or displayed in a tooltip.
+- **File Uploads**: Logos are stored in `wwwroot/Uploads/company-logos`. Ensure the directory is writable.
+- **Roles**: The "company" role is automatically seeded during startup.
+- **Demo Credentials** (after registration):
+   - Email: Use the company email provided during registration.
+   - Password: Set during the "Set Password" step.
+
+---
+
+## 📽️ Demo Video
+
+A video demonstration is recommended to showcase:
+- Company registration with logo upload and preview
+- OTP validation (with OTP displayed in a tooltip for testing)
+- Password setting with validation
+- Login with company email and password
+- Home page displaying company logo and greeting
+- Logout functionality
+
+---
 
