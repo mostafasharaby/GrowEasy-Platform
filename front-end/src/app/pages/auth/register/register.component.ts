@@ -171,6 +171,7 @@ export class RegisterComponent implements OnInit,AfterViewInit {
         next: response => {
           if (response.succeeded) {
             this.router.navigate(['/auth/otp-validator'], { queryParams: { email: this.signupForm.value.email } });
+             this.toastr.info('Please check your google account for verification');
           }
         },
         error: err => console.error('Registration failed', err)

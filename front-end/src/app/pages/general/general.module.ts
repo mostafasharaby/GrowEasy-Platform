@@ -7,8 +7,8 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DeleteModalComponent } from '../../admin/pages/delete-modal/delete-modal.component';
 import { ErrorPageComponent } from './errorPage/errorPage.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 
 const routes: Routes = [

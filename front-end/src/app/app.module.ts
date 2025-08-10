@@ -12,7 +12,6 @@ import { HttpClientModule, provideHttpClient, withFetch } from '@angular/common/
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideToastr, ToastrModule } from 'ngx-toastr'; 
-import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -26,7 +25,6 @@ import { AdminModule } from './admin/admin.module';
   RouterModule.forRoot([]) ,
     AuthModule,
     GeneralModule,  
-    AdminModule,
     BrowserModule,
     FormsModule,
     HttpClientModule,
