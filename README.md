@@ -9,8 +9,8 @@ A full-stack web application designed to streamline company registration, verifi
 GrowEasy Platform is a modern, scalable platform for anonymous users to register as companies, verify their accounts via OTP, set secure passwords, and access a personalized company dashboard. The project is built with clean code principles and a four-layer architecture, ensuring maintainability and scalability.
 
 - **Backend**: .NET Core 8 with Clean Architecture
-- **Frontend**: Angular 16+
-- **Database**: PostgreSQL
+- **Frontend**: Angular 18
+- **Database**: SQL
 - **Authentication**: ASP.NET Identity, JWT, OTP-based email verification
 - **Features**: Company registration, OTP validation, password management, and a minimalistic company dashboard
 
@@ -22,7 +22,7 @@ GrowEasy Platform is a modern, scalable platform for anonymous users to register
 
 ```text
 back-end/GrowEasy/
-├── Data/            # Entity models, DbContext, migrations
+├── Domain/          # Entity models, DbContext, migrations
 ├── Infrastructure/  # Repositories, file handling, email services
 ├── Application/     # Services, CQRS commands/queries, DTOs, AutoMapper
 ├── API/             # Controllers, middleware, API endpoints
@@ -83,7 +83,7 @@ front-end/
 
 ### Frontend
 
-- Angular 16+
+- Angular 18
 - Angular Material for UI components
 - Reactive Forms for form validation
 - RxJS for asynchronous operations
@@ -94,7 +94,7 @@ front-end/
 
 ## 🧪 Testing
 
-- Backend: Unit tests can be implemented using xUnit or NUnit (not included in this sample but recommended).
+- Backend: Unit tests can be implemented using xUnit (not included in this sample but recommended).
 - Frontend: Angular component tests using Jasmine/Karma (extendable for form validation and API calls).
 
 ---
