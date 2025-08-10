@@ -2,6 +2,7 @@
 using CompanyManager.Application.Queries.CompanyQueries;
 using CompanyManager.Application.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -43,7 +44,7 @@ namespace CompanyManager.API.Controllers
         }
 
         [HttpGet("details")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> GetCompanyDetails()
         {
             var email = User.FindFirst(ClaimTypes.Email)?.Value;

@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private authService: AuthServiceService,
     private toastr: ToastrService,
     private router: Router,
-  ) { }
+  ) { } 
   ngOnDestroy(): void {
     if (this.loggedStatusSubscription) {
       this.loggedStatusSubscription.unsubscribe();
